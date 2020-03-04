@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 using namespace System;
+////·F§A®Q©U§£¦Ñ®v
 bool Guess(int number) {
 	static int target = -1;
 	if (target == -1) {
