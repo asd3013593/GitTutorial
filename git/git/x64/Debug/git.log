@@ -1,0 +1,2 @@
+﻿  git.cpp
+c:\users\user\desktop\107590045大二下\物件導向程式實習\gittutorial\git\git\git.cpp(13): fatal error C1010: 尋找先行編譯標頭檔指示詞時碰到未預期的檔案結尾。您的原始檔中是否忘了加上 '#include "pch.h"'?
