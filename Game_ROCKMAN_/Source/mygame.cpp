@@ -254,8 +254,14 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		
+		//int bx, by , ax,ay;
 		role.OnMove();
+		for (int i = 0; i < 3; i++) {
+			//bx = role.GetBulletX(i); by = role.GetBulletY(i); 
+			if (role.GetBulletX(i) == ayumi.GetX() && (role.GetBulletY(i) <= ayumi.GetY()+22 || ayumi.GetY() -22 <= role.GetBulletY(i))){
+				role.SetBulletHit(i, true);
+			}
+		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -263,6 +269,7 @@ namespace game_framework {
 		role_jump = false;
 		role.LoadBitmap();
 		background.LoadBitmap(IDB_Background1);
+		ayumi.LoadBitmap();
 		//
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
@@ -350,6 +357,7 @@ namespace game_framework {
 	{
 		background.ShowBitmap();
 		role.OnShow();
+		ayumi.OnShow();
 	}
 
 	CRole::CRole()
@@ -361,7 +369,7 @@ namespace game_framework {
 		const int nX = 5;
 		const int nY = 430;
 		x = nX;  y = nY;
-		for (int i = 0; i < 3; i++) { having_bullet[i] = 0; bulletDirection[i] = 0; }
+		for (int i = 0; i < 3; i++) { having_bullet[i] = 0; bulletDirection[i] = 0; bulletX[i] = -2; bulletY[i] = -2; bulletHit[i] = false; }
 		bulletIndex = 0;
 		direction =  isAttacking = isMovingDown = isMovingUp = isMovingLeft = isMovingRight = false;
 		DisplayBullet(35);
@@ -435,7 +443,7 @@ namespace game_framework {
 	{	
 
 		for (int i = 0; i < 3; i++) {
-			if (having_bullet[i] == 1) {
+			if (having_bullet[i] == 1 && !bulletHit[i]) {
 				bullet[i].SetTopLeft(bulletX[i], bulletY[i]);
 				bullet[i].OnShow();
 			}
@@ -501,6 +509,10 @@ namespace game_framework {
 	{
 		isAttacking = flag;
 	}
+	void CRole::SetBulletHit(int i ,bool flag)
+	{
+		bulletHit[i] = flag;
+	}
 	void CRole::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
@@ -545,8 +557,51 @@ namespace game_framework {
 		return bulletIndex;
 	}
 
-
 	int CRole::GetY()
+	{
+		return y;
+	}
+	int CRole::GetBulletX(int i )
+	{
+		return bulletX[i];
+	}
+	int CRole::GetBulletY(int i )
+	{
+		return bulletY[i];
+	}
+	CAyumi::CAyumi()
+	{
+		Initialize();
+	}
+	void CAyumi::Initialize()
+	{
+		const int nx = 550, ny = 435;
+		x = nx; y = ny;
+		
+	}
+	void CAyumi::LoadBitmap()
+	{
+		standAnimation.AddBitmap(IDB_AYUMI_1,RGB(255,255,255));
+	}
+	void CAyumi::OnMove()
+	{
+	}
+	void CAyumi::OnShow()
+	{
+		standAnimation.SetTopLeft(x, y);
+		standAnimation.OnShow();
+	}
+	void CAyumi::SetMovingLeft(bool flag)
+	{
+	}
+	void CAyumi::SetMovingRight(bool flag)
+	{
+	}
+	int CAyumi::GetX()
+	{
+		return x;
+	}
+	int CAyumi::GetY()
 	{
 		return y;
 	}

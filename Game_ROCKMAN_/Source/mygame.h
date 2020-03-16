@@ -53,6 +53,21 @@ namespace game_framework {
 // 這個class提供可以用鍵盤或滑鼠控制的擦子
 // 看懂就可以改寫成自己的程式了
 /////////////////////////////////////////////////////////////////////////////
+class CAyumi {
+public:
+	CAyumi();
+	void Initialize();
+	virtual void LoadBitmap();
+	void OnMove();
+	void OnShow();
+	void SetMovingLeft(bool flag);
+	void SetMovingRight(bool flag);
+	int  GetX();
+	int  GetY();
+private:
+	CAnimation standAnimation;
+	int x, y;
+};
 class CRole {
 public:
 	CRole();
@@ -65,6 +80,7 @@ public:
 	void SetMovingUp(bool flag);
 	void SetMovingDown(bool flag);
 	void SetAttacking(bool flag);
+	void SetBulletHit(int,bool flag);
 	void bulletMoving(bool flag);
 	void SetXY(int nx, int ny);
 	void DisplayBullet(int);
@@ -73,6 +89,8 @@ public:
 	int  BulletIndex();
 	bool KeyDownDelay();
 	int GetY();
+	int GetBulletX(int);
+	int GetBulletY(int);
 protected:
 	CAnimation	standRightAnimation;
 	CAnimation	standLeftAnimation;
@@ -93,10 +111,12 @@ protected:
 	bool isMovingUp;
 	bool isMovingDown;
 	bool isAttacking;
+	bool bulletHit[3];
 	int	 delay_bullet[3];	// 延緩動畫播放速度的計數器
 	int	 delay_count[3];	// 動畫播放速度的常數
-	int  bulletIndex;
+	int  bulletIndex;		
 	int	 bulletDirection[3];
+	
 };
 
 class CGameStateInit : public CGameState {
@@ -148,6 +168,7 @@ private:
 	CMovingBitmap	background;
 	CMovingBitmap	rock_stand;
 	CRole			role;
+	CAyumi			ayumi;
 	int				picX,picY;
 	bool			role_jump;
 };

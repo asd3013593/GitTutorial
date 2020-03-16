@@ -178,6 +178,8 @@ IDB_ROCKMANATTACKL      BITMAP                  "..\\RES\\ATTACKL.bmp"
 
 IDB_ICEBAR              BITMAP                  "..\\RES\\ICE.bmp"
 
+IDB_AYUMI_1             BITMAP                  "..\\RES\\boss1_1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

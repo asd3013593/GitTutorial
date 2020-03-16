@@ -332,6 +332,7 @@
     <Image Include="RES\blue..bmp" />
     <Image Include="RES\blue.bmp" />
     <Image Include="res\bmp00001.bmp" />
+    <Image Include="RES\boss1_1.bmp" />
     <Image Include="res\bullet_2.bmp" />
     <Image Include="res\bullet_3.bmp" />
     <Image Include="RES\EXIT.bmp" />
