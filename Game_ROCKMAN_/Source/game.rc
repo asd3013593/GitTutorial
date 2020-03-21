@@ -180,6 +180,16 @@ IDB_ICEBAR              BITMAP                  "..\\RES\\ICE.bmp"
 
 IDB_AYUMI_1             BITMAP                  "..\\RES\\boss1_1.bmp"
 
+IDB_ICELEFT             BITMAP                  "..\\RES\\ICELEFT.bmp"
+
+IDB_AYUMIATTACKED       BITMAP                  "..\\RES\\1234.bmp"
+
+IDB_BITMAP11            BITMAP                  "C:\\Users\\user\\Desktop\\Game_ROCKMAN_\\RES\\AYUMIATTACKED.bmp"
+
+IDB_BITMAP12            BITMAP                  "C:\\Users\\user\\Desktop\\Game_ROCKMAN_\\RES\\FotoJet.bmp"
+
+IDB_FLASHH              BITMAP                  "..\\RES\\flash.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

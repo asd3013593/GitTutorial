@@ -282,5 +282,18 @@
     <Image Include="RES\boss1_1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\ICELEFT.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\1234.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\AYUMIATTACKED.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\flash.png" />
+    <Image Include="RES\flash.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

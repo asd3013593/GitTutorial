@@ -46,7 +46,7 @@
  *   2008-02-15 V4.4
  *      1. Add namespace game_framework.
  *      2. Replace the demonstration of animation as a new bouncing ball.
- *      3. Use ShowInitProgress(percent) to display loading progress. 
+ *      3. Use ShowInitProgress(percent) to display loading progress.
  *   2010-03-23 V4.6
  *      1. Demo MP3 support: use lake.mp3 to replace lake.wav.
 */
@@ -61,7 +61,7 @@
 
 namespace game_framework {
 
-	/////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 	// CBall: Ball class
 	/////////////////////////////////////////////////////////////////////////////
 
@@ -69,7 +69,7 @@ namespace game_framework {
 	// CBouncingBall: BouncingBall class
 	/////////////////////////////////////////////////////////////////////////////
 
-	
+
 	/////////////////////////////////////////////////////////////////////////////
 	// CEraser: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ namespace game_framework {
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
-	/////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	CGameStateInit::CGameStateInit(CGame *g)
 		: CGameState(g)
@@ -90,14 +90,14 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
+
+		/*	 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+				 等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。*/
+
 		ShowInitProgress(0);	// 一開始的loading進度為0%
-		//
-		// 開始載入資料
-		//
+
+		/* 開始載入資料*/
+
 		backGround.LoadBitmap(IDB_INITBACKGROUND);
 		logo.LoadBitmap(IDB_INITGOD);
 		gameStart.LoadBitmap(IDB_GAMESTART);
@@ -105,9 +105,9 @@ namespace game_framework {
 		arrow.LoadBitmap(IDB_ARROW);
 
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
-		//
+
+		 //此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
+
 	}
 
 	void CGameStateInit::OnBeginState()
@@ -139,9 +139,9 @@ namespace game_framework {
 
 	void CGameStateInit::OnShow()
 	{
-		//
-		// 貼上logo
-		//
+		/*
+			 貼上logo*/
+
 		backGround.SetTopLeft(0, 0);
 		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 8);
 		gameStart.SetTopLeft(240, 260);
@@ -153,24 +153,24 @@ namespace game_framework {
 		exit.ShowBitmap();
 		arrow.ShowBitmap();
 
-		//
-		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-		//
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CFont f, *fp;
+		/*
+		 Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
+		*/
+		//CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		//CFont f, *fp;
 
-		f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
+		//f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		//fp = pDC->SelectObject(&f);					// 選用 font f
 
-		if (ENABLE_GAME_PAUSE)
-			pDC->TextOut(5, 5, "Press Ctrl-Q to pause the Game.");
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		//if (ENABLE_GAME_PAUSE)
+		//	pDC->TextOut(5, 5, "Press Ctrl-Q to pause the Game.");
+		//pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		//CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的結束狀態(Game Over)
-	/////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	 //這個class為遊戲的結束狀態(Game Over)
+	///////////////////////////////////////////////////////////////////////////
 
 	CGameStateOver::CGameStateOver(CGame *g)
 		: CGameState(g)
@@ -191,39 +191,39 @@ namespace game_framework {
 
 	void CGameStateOver::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
+
+		/*當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+			等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。*/
+
 		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
-		//
-		// 開始載入資料
-		//
+
+	/*	 開始載入資料*/
+
 		Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 最終進度為100%
-		//
+
+		 //最終進度為100%
+
 		ShowInitProgress(100);
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "Game Over ! (%d)", counter / 30);
-		pDC->TextOut(240, 210, str);
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		//CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		//CFont f, *fp;
+		//f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		//fp = pDC->SelectObject(&f);					// 選用 font f
+		//pDC->SetBkColor(RGB(0, 0, 0));
+		//pDC->SetTextColor(RGB(255, 255, 0));
+		//char str[80];								// Demo 數字對字串的轉換
+		//sprintf(str, "Game Over ! (%d)", counter / 30);
+		//pDC->TextOut(240, 210, str);
+		//pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		//CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
-	/////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
+	 //這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
+	///////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
 		: CGameState(g), NUMBALLS(28)
@@ -233,7 +233,7 @@ namespace game_framework {
 
 	CGameStateRun::~CGameStateRun()
 	{
-	
+
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -255,13 +255,12 @@ namespace game_framework {
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		//int bx, by , ax,ay;
+
 		role.OnMove();
-		for (int i = 0; i < 3; i++) {
-			//bx = role.GetBulletX(i); by = role.GetBulletY(i); 
-			if (role.GetBulletX(i) == ayumi.GetX() && (role.GetBulletY(i) <= ayumi.GetY()+22 || ayumi.GetY() -22 <= role.GetBulletY(i))){
-				role.SetBulletHit(i, true);
-			}
-		}
+		
+		AttackCollision();
+		ayumi.OnMove();
+		
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -270,21 +269,21 @@ namespace game_framework {
 		role.LoadBitmap();
 		background.LoadBitmap(IDB_Background1);
 		ayumi.LoadBitmap();
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
+
+		//當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+		//    等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+
 		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		//
 		// 開始載入資料
 		//
-		
+
 		//CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		//CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		//CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
-		//
+
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -330,27 +329,44 @@ namespace game_framework {
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-	
+		
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		// 沒事。如果需要處理滑鼠移動的話，寫code在這裡
+		
 	}
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
 		
+	}
+
+	void CGameStateRun::AttackCollision()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			if (role.GetBulletY(i) >= ayumi.GetY() && ayumi.GetY() + 44 >= role.GetBulletY(i)) {
+				if (role.ShotPostionX(i) < ayumi.GetX() && role.BulletDiretion(i) && role.GetBulletX(i) + 30 >= ayumi.GetX()) {
+					role.SetBulletHit(i,true);
+					ayumi.SetAttacked(true);
+				}
+				else if (role.ShotPostionX(i) > ayumi.GetX() &&!role.BulletDiretion(i) && role.GetBulletX(i) - 35 <= ayumi.GetX()) {
+					role.SetBulletHit(i,true);
+					ayumi.SetAttacked(true);
+				} 
+			}
+		}
 	}
 
 	void CGameStateRun::OnShow()
@@ -369,25 +385,22 @@ namespace game_framework {
 		const int nX = 5;
 		const int nY = 430;
 		x = nX;  y = nY;
-		for (int i = 0; i < 3; i++) { having_bullet[i] = 0; bulletDirection[i] = 0; bulletX[i] = -2; bulletY[i] = -2; bulletHit[i] = false; }
+		for (int i = 0; i < 3; i++) { having_bullet[i] = 0; bulletDirection[i] = 0; bulletX[i] = -2; bulletY[i] = -2; bulletHit[i] = false; shotX[i] = 0; }
 		bulletIndex = 0;
-		direction =  isAttacking = isMovingDown = isMovingUp = isMovingLeft = isMovingRight = false;
+		direction = isAttacking = isMovingDown = isMovingUp = isMovingLeft = isMovingRight = false;
 		DisplayBullet(35);
 	}
 	void CRole::LoadBitmap()
 	{
-		for (int i = 0; i < 3; i++) bullet[i].AddBitmap(IDB_ICEBAR,RGB(255,255,255));
-		
-		test.AddBitmap(IDB_Blue);
+		for (int i = 0; i < 3; i++) { bullet[i].AddBitmap(IDB_ICEBAR, RGB(255, 255, 255)); bulletLeft[i].LoadBitmap(IDB_ICELEFT, RGB(255, 255, 255)); }
+
+
 		standRightAnimation.AddBitmap(IDB_BITMAP8, RGB(255, 255, 255));
 		standLeftAnimation.AddBitmap(IDB_ROCKMANLEFT, RGB(255, 255, 255));
 		runRightAnimation.AddBitmap(IDB_RUNRIGHT_1, RGB(255, 255, 255));
 		runRightAnimation.AddBitmap(IDB_RUNRIGHT_2, RGB(255, 255, 255));
-		//runRightAnimation.AddBitmap(IDB_RUNNINGRIGHT_3, RGB(255, 255, 255));
-		//runRightAnimation.AddBitmap(IDB_RUNNINGRIGHT_1, RGB(255, 255, 255));
 		runLeftAnimation.AddBitmap(IDB_RUNLEFT_1, RGB(255, 255, 255));
 		runLeftAnimation.AddBitmap(IDB_RUNLEFT_2, RGB(255, 255, 255));
-		//runLeftAnimation.AddBitmap(IDB_RUNNINGLEFT_3, RGB(255, 255, 255));
 		jumpRightAnimation.AddBitmap(IDB_JUMPINGRIGHT, RGB(255, 255, 255));
 		jumpLeftAnimation.AddBitmap(IDB_JUMPINGLEFT, RGB(255, 255, 255));
 		attackLeftAnimation.AddBitmap(IDB_ROCKMANATTACKL, RGB(255, 255, 255));
@@ -432,22 +445,34 @@ namespace game_framework {
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			if (having_bullet[i] == 1)
-				if(bulletDirection[i] == 1) bulletX[i] += BULLET_SPEED;
-				else bulletX[i] -= BULLET_SPEED;
+			if (having_bullet[i] == 1) {
+				if (bulletHit[i]) {
+					bulletX[i] += distant;
+				}
+				else {
+					if (bulletDirection[i] == 1) bulletX[i] += BULLET_SPEED;
+					else bulletX[i] -= BULLET_SPEED;
+				}
+			}
 		}
-
 		BulletReset();
 	}
 	void CRole::OnShow()
-	{	
+	{
 
 		for (int i = 0; i < 3; i++) {
 			if (having_bullet[i] == 1 && !bulletHit[i]) {
-				bullet[i].SetTopLeft(bulletX[i], bulletY[i]);
-				bullet[i].OnShow();
+				if (bulletDirection[i]) {
+					bullet[i].SetTopLeft(bulletX[i], bulletY[i]);
+					bullet[i].OnShow();
+				}
+				else {
+					bulletLeft[i].SetTopLeft(bulletX[i], bulletY[i]);
+					bulletLeft[i].ShowBitmap();
+				}
 			}
 		}
+
 		if (isAttacking) {
 			if (direction == 1) {
 				attackRightAnimation.SetTopLeft(x, y);
@@ -488,6 +513,7 @@ namespace game_framework {
 				standLeftAnimation.OnShow();
 			}
 		}
+
 	}
 	void CRole::SetMovingLeft(bool flag)
 	{
@@ -509,9 +535,10 @@ namespace game_framework {
 	{
 		isAttacking = flag;
 	}
-	void CRole::SetBulletHit(int i ,bool flag)
+	void CRole::SetBulletHit(int i, bool flag)
 	{
 		bulletHit[i] = flag;
+		bulletX[i] = -1; bulletY[i] = -1;
 	}
 	void CRole::SetXY(int nx, int ny)
 	{
@@ -529,9 +556,10 @@ namespace game_framework {
 		if (having_bullet[i] == 0)
 		{
 			bulletDirection[i] = direction;
-			bulletX[i] = x; bulletY[i] = y + 17;
+			shotX[i] = bulletX[i] = x; bulletY[i] = y + 17;
 			having_bullet[i] = 1;
 			bulletIndex += 1;
+			bulletHit[i] = false;
 			if (bulletIndex == 3) bulletIndex = 0;
 			return true;
 		}
@@ -544,30 +572,53 @@ namespace game_framework {
 		{
 			if (having_bullet[i] == 1)
 			{
-				if (--delay_bullet[i]<= 10)
+				if (--delay_bullet[i] <= 10)
 				{
+					bulletHit[i] = false;
 					delay_bullet[i] = delay_count[i];
 					having_bullet[i] = 0;
 				}
 			}
 		}
 	}
+	void CRole::FillBulletDistant(int index, int distant)
+	{
+		bulletX[index] += distant;
+		CRole::OnShow();
+	}
+	bool CRole::BulletDiretion(int i)
+	{
+		return bulletDirection[i];
+	}
 	int CRole::BulletIndex()
 	{
 		return bulletIndex;
+	}
+
+	void CRole::Distant(int i)
+	{
+		distant = i;
 	}
 
 	int CRole::GetY()
 	{
 		return y;
 	}
-	int CRole::GetBulletX(int i )
+	int CRole::GetX()
+	{
+		return x;
+	}
+	int CRole::GetBulletX(int i)
 	{
 		return bulletX[i];
 	}
-	int CRole::GetBulletY(int i )
+	int CRole::GetBulletY(int i)
 	{
 		return bulletY[i];
+	}
+	int CRole::ShotPostionX(int i )
+	{
+		return shotX[i];
 	}
 	CAyumi::CAyumi()
 	{
@@ -575,27 +626,81 @@ namespace game_framework {
 	}
 	void CAyumi::Initialize()
 	{
-		const int nx = 550, ny = 435;
+		const int nx = 350, ny = 435;
 		x = nx; y = ny;
-		
+		isMovingRight = false;
+		isMovingLeft = true;
+		isAttacked = false;
+		animation = 0;
 	}
 	void CAyumi::LoadBitmap()
 	{
-		standAnimation.AddBitmap(IDB_AYUMI_1,RGB(255,255,255));
+		standAnimation.AddBitmap(IDB_AYUMI_1, RGB(255, 255, 255));
+		attackedAnimation.AddBitmap(IDB_BITMAP11, RGB(255, 255, 255));
+		//for (int i = 0; i < 3; i++) attackedAnimation[i].AddBitmap(IDB_BITMAP11, RGB(0, 153, 153));
+		flash.LoadBitmap(IDB_FLASHH, RGB(120,120,120));
 	}
 	void CAyumi::OnMove()
 	{
+		const int STEP_SIZE = 5;
+
+
+		if (x <= 20) {
+			SetMovingRight(true);
+			SetMovingLeft(false);
+		}
+		else if (x >= 550) {
+			SetMovingRight(false);
+			SetMovingLeft(true);
+		}
+
+		if (isMovingRight) {
+			x += STEP_SIZE;
+		}
+		if (isMovingLeft) {
+			x -= STEP_SIZE;
+		}
 	}
+
 	void CAyumi::OnShow()
 	{
-		standAnimation.SetTopLeft(x, y);
-		standAnimation.OnShow();
+			if (isAttacked)
+			{
+				flash.SetTopLeft(x - 20, y - 13);
+				flash.ShowBitmap();
+				attackedAnimation.SetTopLeft(x - 20, y - 13);
+				attackedAnimation.OnShow();
+				
+				animation = 0;
+			}
+
+			else if (animation < 2)
+			{
+				attackedAnimation.SetTopLeft(x - 20, y - 13);
+				attackedAnimation.OnShow();
+				animation++;
+			}
+
+			else
+			{
+				standAnimation.SetTopLeft(x, y);
+				standAnimation.OnShow();
+			}
+		
+			isAttacked = false;
 	}
 	void CAyumi::SetMovingLeft(bool flag)
 	{
+		isMovingLeft = flag;
 	}
 	void CAyumi::SetMovingRight(bool flag)
 	{
+		isMovingRight = flag;
+
+	}
+	void CAyumi::SetAttacked(bool flag)
+	{
+		isAttacked = flag;
 	}
 	int CAyumi::GetX()
 	{

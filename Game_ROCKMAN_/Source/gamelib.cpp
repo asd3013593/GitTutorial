@@ -184,7 +184,7 @@ int CAnimation::Left()
 void CAnimation::OnMove()
 {
 	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
-	if (--delay_counter <= 7) {
+	if (--delay_counter <= 8) {
 		delay_counter = delay_count;
 		bmp_iter++;
 		bmp_counter++;

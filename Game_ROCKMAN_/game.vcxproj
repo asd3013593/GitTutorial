@@ -319,12 +319,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\background\background1.bmp.png" />
+    <Image Include="RES\1234.bmp" />
     <Image Include="RES\arrow.bmp" />
     <Image Include="RES\attack.bmp" />
     <Image Include="RES\attacked.bmp" />
     <Image Include="RES\ATTACKL.bmp" />
     <Image Include="RES\attackLeft.bmp" />
     <Image Include="RES\attackRight.bmp" />
+    <Image Include="RES\AYUMIATTACKED.bmp" />
     <Image Include="RES\background1.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
@@ -336,10 +338,13 @@
     <Image Include="res\bullet_2.bmp" />
     <Image Include="res\bullet_3.bmp" />
     <Image Include="RES\EXIT.bmp" />
+    <Image Include="RES\flash.bmp" />
+    <Image Include="RES\flash.png" />
     <Image Include="RES\FotoJet.bmp" />
     <Image Include="RES\GAMESTART.bmp" />
     <Image Include="RES\green.bmp" />
     <Image Include="RES\ICE.bmp" />
+    <Image Include="RES\ICELEFT.bmp" />
     <Image Include="RES\Init_God.bmp" />
     <Image Include="RES\JUMP.bmp" />
     <Image Include="RES\JUMPLEFT.bmp" />
